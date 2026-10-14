@@ -1,0 +1,45 @@
+/* Страница «Дополнительно»: гибкая (flex) модель */
+.flex-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.flex-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+}
+
+.flex-card {
+    flex: 1 1 300px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.flex-card img {
+    max-width: 100%;
+    height: auto;
+}
+
+.flex-row > img.thumb {
+    flex: 0 0 auto;
+    max-width: 300px;
+}
+
+.flex-row > .flag-list {
+    flex: 1 1 300px;
+}
+
+@media screen and (max-width: 600px) {
+    .flex-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .flex-row > img.thumb {
+        max-width: 100%;
+    }
+}

@@ -1,0 +1,329 @@
+/* ===== Подключение нестандартного шрифта (@font-face) ===== */
+@font-face {
+    font-family: 'MainCustomFont';
+    src: url('../fonts/customfont.woff') format('woff'),
+         url('../fonts/customfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Альтернативная блочная модель для всех элементов */
+html {
+    box-sizing: border-box;
+}
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+/* ===== Фон: флаг РФ + «горошек» (radial-gradient) + общий градиент ===== */
+body {
+    font-family: 'MainCustomFont', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #2c3e50;
+    margin: 0;
+    padding: 20px;
+    background-color: #cfe3fb;
+    background-image:
+        linear-gradient(to bottom, rgba(255,255,255,0.85) 33%, rgba(0,57,166,0.15) 33%, rgba(0,57,166,0.15) 66%, rgba(213,43,30,0.15) 66%),
+        radial-gradient(circle, rgba(255,255,255,0.45) 2px, transparent 3px),
+        linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+    background-size: 100% 100%, 24px 24px, 100% 100%;
+    background-repeat: no-repeat, repeat, no-repeat;
+    background-position: 0 0, 0 0, 0 0;
+    background-attachment: fixed;
+}
+
+/* ===== Заголовки ===== */
+h1, h2 {
+    color: #1a2a3a;
+    font-variant: small-caps;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.15);
+    letter-spacing: 0.5px;
+    margin-bottom: 15px;
+}
+
+h1 {
+    font-size: 1.8em;
+    border-bottom: 2px solid #d52b1e;
+    padding-bottom: 8px;
+}
+
+h3 {
+    font-weight: 600;
+    font-size: 1.15rem;
+    color: #0039a6;
+}
+
+/* ===== Абзацы ===== */
+p {
+    text-indent: 20px;
+    text-align: justify;
+    margin-bottom: 12px;
+}
+
+.card > p::first-letter {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #d52b1e;
+}
+
+/* соседний селектор (+): абзац сразу после абзаца */
+p + p {
+    margin-top: -4px;
+}
+
+/* селектор последовательных элементов (~): список после абзаца */
+p ~ ol {
+    list-style-type: upper-roman;
+    list-style-position: inside;
+    margin-left: 0;
+}
+
+/* соседний селектор (+): абзац сразу после маркированного списка */
+ul + p {
+    border-top: 1px dashed #99a;
+    padding-top: 10px;
+}
+
+/* соседний селектор (+): таблица сразу после заголовка */
+h2 + table {
+    margin-top: 5px;
+}
+
+/* ===== Ссылки ===== */
+a {
+    color: #0056b3;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #d52b1e;
+    text-decoration: underline;
+}
+
+/* селектор атрибута: внешние ссылки */
+a[target="_blank"]::after {
+    content: " \2197";
+    font-size: 0.85em;
+}
+
+/* ===== Списки ===== */
+ol, ul {
+    margin-left: 20px;
+    margin-bottom: 15px;
+}
+
+/* селектор атрибута: список без маркеров */
+ul[type="none"] {
+    list-style: none;
+    padding-left: 0;
+    margin-left: 0;
+}
+
+ul[type="none"] li {
+    margin-bottom: 10px;
+}
+
+/* дочерний селектор: картинка-маркер внутри пункта */
+ul[type="none"] > li > img.marker {
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+    margin-right: 6px;
+}
+
+/* авторский список: маркер-картинка (флаг) через list-style-image */
+.flag-list {
+    list-style-type: square;
+    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='18' height='12'><rect width='18' height='4' fill='%23ffffff' stroke='%23999999' stroke-width='0.5'/><rect y='4' width='18' height='4' fill='%230039a6'/><rect y='8' width='18' height='4' fill='%23d52b1e'/></svg>");
+    list-style-position: outside;
+    padding-left: 25px;
+    margin-left: 0;
+}
+
+.flag-list li {
+    margin-bottom: 10px;
+}
+
+/* ===== Карточки ===== */
+.card {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    margin-bottom: 20px;
+    border: 1px solid rgba(255,255,255,0.5);
+}
+
+/* ===== Цитата: рамка-градиент (border-image) цветов флага ===== */
+blockquote {
+    margin: 0;
+    padding: 10px 15px;
+    font-style: italic;
+    border-left: 6px solid #0039a6;
+    border-image: linear-gradient(to bottom, #0039a6 0%, #0039a6 50%, #d52b1e 50%, #d52b1e 100%) 1;
+}
+
+/* ===== Таблицы ===== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    margin: 15px 0;
+}
+
+th {
+    background-color: #0039a6 !important;
+    color: #ffffff !important;
+    padding: 12px;
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #eef2f5;
+}
+
+/* выравнивание столбцов средствами CSS */
+td:first-child {
+    text-align: center;
+}
+
+td:nth-child(n+4) {
+    text-align: right;
+    white-space: nowrap;
+}
+
+tr:nth-child(even) {
+    background-color: #f8fafc;
+}
+
+tr:hover {
+    background-color: #e6f0ff;
+    transition: background-color 0.2s;
+}
+
+/* ===== Изображения ===== */
+img {
+    border-radius: 6px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+img.hero {
+    display: block;
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+}
+
+/* цвет выделенного текста */
+::selection {
+    background: #0039a6;
+    color: #ffffff;
+}
+
+/* ===== Кнопки навигации ===== */
+.nav-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin: 25px 0 10px 0;
+    padding: 10px;
+}
+
+.nav-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px 18px;
+    background-color: #ffffff;
+    color: #0039a6;
+    border: 2px solid #0039a6;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+    transition: all 0.25s ease-in-out;
+}
+
+.nav-btn:hover {
+    background-color: #0039a6;
+    color: #ffffff;
+    text-decoration: none;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,57,166,0.25);
+}
+
+.nav-btn.home-btn {
+    border-color: #d52b1e;
+    color: #d52b1e;
+}
+
+.nav-btn.home-btn:hover {
+    background-color: #d52b1e;
+    color: #ffffff;
+    box-shadow: 0 4px 10px rgba(213,43,30,0.25);
+}
+
+/* ===== Типы носителей ===== */
+@media screen and (max-width: 768px) {
+    body {
+        padding: 10px;
+        font-size: 14px;
+    }
+    table {
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .nav-buttons {
+        flex-direction: column;
+    }
+    h1 {
+        font-size: 1.4em;
+    }
+}
+
+@media print {
+    body {
+        background: none;
+        color: #000000;
+        font-size: 12pt;
+        padding: 0;
+    }
+    .card {
+        box-shadow: none;
+        border: 1px solid #666666;
+        break-inside: avoid;
+    }
+    .nav-buttons {
+        display: none;
+    }
+    a[href^="http"]::after {
+        content: " (" attr(href) ")";
+        font-size: 0.8em;
+    }
+    img:hover {
+        transform: none;
+        box-shadow: none;
+    }
+}

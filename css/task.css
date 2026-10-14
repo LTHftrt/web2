@@ -1,0 +1,175 @@
+/* ===== Задание 3. Только CSS ===== */
+
+/* ---- 1. Раскрывающийся список навигационной панели ---- */
+.dropdown-menu,
+.dropdown-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 10px 14px;
+    color: #ecf0f1;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background 0.3s, color 0.3s;
+}
+
+.dropdown-menu a:hover {
+    background-color: #34495e;
+    color: #3498db;
+}
+
+.dropdown-menu .fa {
+    width: 1.2em;
+    margin-right: 6px;
+    text-align: center;
+}
+
+/* стрелка у пункта с подменю (иконочный шрифт FontAwesome) */
+.dropdown-menu .has-sub > a::after {
+    content: "\f107";
+    font-family: FontAwesome;
+    float: right;
+    transition: transform 0.3s;
+}
+
+.dropdown-menu .has-sub:hover > a::after {
+    transform: rotate(180deg);
+}
+
+/* подменю скрыто и плавно раскрывается при наведении */
+.dropdown-menu ul {
+    max-height: 0;
+    overflow: hidden;
+    background-color: #34495e;
+    border-radius: 6px;
+    transition: max-height 0.4s ease;
+}
+
+.dropdown-menu li:hover > ul {
+    max-height: 200px;
+}
+
+.dropdown-menu ul a {
+    padding-left: 32px;
+    font-size: 13px;
+}
+
+.dropdown-menu ul a[href*="#"] {
+    border-left: 3px solid #3498db;
+}
+
+/* ---- 2. Движущийся элемент (флаг бегает по подвалу) ---- */
+@keyframes run {
+    0%   { transform: translateX(0) rotate(0deg); }
+    25%  { transform: translateX(calc((100vw - 48px) / 4)) rotate(-8deg); }
+    50%  { transform: translateX(calc(100vw - 48px)) rotate(0deg); }
+    75%  { transform: translateX(calc((100vw - 48px) * 0.75)) rotate(8deg); }
+    100% { transform: translateX(0) rotate(0deg); }
+}
+
+.moving-flag {
+    position: absolute;
+    left: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 20px;
+    border-radius: 2px;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    background: linear-gradient(to bottom, #ffffff 0%, #ffffff 33.3%, #0039a6 33.3%, #0039a6 66.6%, #d52b1e 66.6%, #d52b1e 100%);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    cursor: pointer;
+    animation: run 8s infinite ease-in-out;
+}
+
+.moving-flag:hover {
+    animation-play-state: paused;
+}
+
+/* ---- 3. Оригинальные всплывающие подсказки ---- */
+.tooltip-container {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dashed #000000;
+    cursor: help;
+    text-indent: 0;
+}
+
+.tooltip-container .tooltip-text {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    z-index: 100;
+    max-width: 80vw;
+    text-align: left;
+    text-indent: 0;
+    line-height: 1.4;
+    font-style: normal;
+    font-weight: normal;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+}
+
+.tooltip-container:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* стиль 1: тёмная подсказка со стрелкой */
+.tooltip-style-dark .tooltip-text {
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    width: 200px;
+    background-color: #333333;
+    color: #ffffff;
+    text-align: center;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+}
+
+.tooltip-style-dark .tooltip-text::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -6px;
+    border: 6px solid transparent;
+    border-top-color: #333333;
+}
+
+.tooltip-style-dark:hover .tooltip-text {
+    transform: translateX(-50%) translateY(0);
+}
+
+/* стиль 2: жёлтая «стикер»-подсказка */
+.tooltip-style-yellow .tooltip-text {
+    bottom: 120%;
+    left: 0;
+    width: 260px;
+    background-color: #fffde7;
+    color: #333333;
+    border: 2px solid #ffe082;
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    font-size: 13px;
+}
+
+/* стиль 3: голубая подсказка под словом */
+.tooltip-style-blue .tooltip-text {
+    top: 100%;
+    left: 0;
+    margin-top: 4px;
+    width: 220px;
+    background-color: #d0e1f9;
+    color: #1e3d59;
+    border: 1px solid #1e3d59;
+    padding: 8px;
+    font-size: 12px;
+}

@@ -1,0 +1,71 @@
+/* Страница «Галерея»: сеточная (grid) модель и фотоальбом */
+/* фон: «капли дождя на воде» - repeating-radial-gradient */
+body {
+    background-image:
+        repeating-radial-gradient(circle at 20% 30%, rgba(255,255,255,0.55) 0, rgba(255,255,255,0.55) 4px, rgba(255,255,255,0) 4px, rgba(255,255,255,0) 18px),
+        repeating-radial-gradient(circle at 80% 70%, rgba(255,255,255,0.40) 0, rgba(255,255,255,0.40) 4px, rgba(255,255,255,0) 4px, rgba(255,255,255,0) 22px),
+        linear-gradient(135deg, #8ec5fc 0%, #e0c3fc 100%);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+body > h2 {
+    text-align: center;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 15px;
+    margin: 20px 0;
+}
+
+/* высота фиксирована, чтобы сетка не «прыгала» при увеличении фото */
+.gallery-item {
+    position: relative;
+    height: 166px;
+    background: #ffffff;
+    padding: 8px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* при наведении превью раскрывается */
+.gallery-item:hover img {
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    width: 280px;
+    height: 200px;
+    z-index: 100;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+    border: 3px solid #ffffff;
+    transform: none;
+}
+
+/* подпись под раскрытым фото берётся из атрибута data-name */
+.gallery-item:hover::after {
+    content: attr(data-name);
+    position: absolute;
+    top: 186px;
+    left: -20px;
+    width: 286px;
+    z-index: 101;
+    padding: 4px 10px;
+    background: #0039a6;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 0 0 4px 4px;
+}
